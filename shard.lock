@@ -1,0 +1,10 @@
+version: 1.0
+shards:
+  discordcr:
+    path: /home/frog/discordcr
+    version: 0.1.0
+
+  dotenv:
+    github: gdotdesign/cr-dotenv
+    commit: 68702bfa0a3c7eda9aa448c36d2d68dcecce7677
+

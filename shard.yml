@@ -1,0 +1,13 @@
+name: okbot
+version: 0.1.0
+
+authors:
+  - Jonathan B. <greenbigfrog@gmail.com>
+
+license: MIT
+
+dependencies:
+  discordcr:
+    github: meew0/discordcr
+  dotenv:
+    github: gdotdesign/cr-dotenv
