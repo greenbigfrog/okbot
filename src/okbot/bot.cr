@@ -7,7 +7,6 @@ require "json"
 
 require "discordcr"
 
-prefix = ENV["PREFIX"]
 client = Discord::Client.new(token: ENV["TOKEN"], client_id: ENV["APPID"].to_u64)
 
 def get(link : String)
@@ -19,24 +18,24 @@ coins = ["007", "1337", "1CR", "256", "2FLAV", "2GIVE", "404", "611", "888", "8B
 
 client.on_message_create do |message|
   case message.content
-  when /^\#{prefix}ping/
+  when /^\.ping/
     # ATM just responds with "pong"
     client.create_message(message.channel_id, "pong")
-  when /^\#{prefix}price/
+  when /^\.price/
     # Gets price info from cryptonator
     response = get "https://api.cryptonator.com/api/full/ok-btc"
     res = response["ticker"]
     string = ""
     res["markets"].each { |x| string = string + "#{x["market"]}: #{x["price"]} BTC, " }
     client.create_message(message.channel_id, "#{string} _(Cryptonator)_")
-  when /^\#{prefix}market/
+  when /^\.market/
     # Gets maret info (price command + volume)
     response = get "https://api.cryptonator.com/api/full/ok-btc"
     res = response["ticker"]
     string = ""
     res["markets"].each { |x| string = string + "#{x["market"]}:\n  Price: #{x["price"]} BTC, Volume: #{x["volume"]} OK\n" }
     client.create_message(message.channel_id, "```yaml\n#{string}(Cryptonator)\n```")
-  when /^\#{prefix}convert/
+  when /^\.convert/
     # converts cryptocurrencies
     msg = message.content.split
     puts "msg: #{msg}"
@@ -71,7 +70,7 @@ client.on_message_create do |message|
 
     client.create_message(message.channel_id, "**#{amount}** #{base} = **#{price}** #{target} (Cryptonator)")
 
-  when /^\#{prefix}bittrex/
+  when /^\.bittrex/
     response = get "https://bittrex.com/api/v1.1/public/getticker?market=btc-ok"
     res = response["result"]
     bid = "%.8f" % res["Bid"].as_f
@@ -79,14 +78,14 @@ client.on_message_create do |message|
     last = "%.8f" % res["Last"].as_f
     client.create_message(message.channel_id, "**Bittrex**\n_Bid:_ #{bid}, _Ask:_ #{ask}, _Last_: #{last}")
 
-  when /^\#{prefix}gif/
+  when /^\.gif/
     msg = message.content.split
     tag = msg[1..-1].join("+")
     response = get "https://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=#{tag}"
 
     client.create_message(message.channel_id, "#{response["data"]["image_original_url"]}")
 
-  when /^\#{prefix}help/, /^#{prefix}commands/
+  when /^\.help/, /^.commands/
     client.create_message(message.channel_id, "List of commands: `.price`, `.market`, `.convert`, `.bittrex`, `.gif`")
   end
 end
