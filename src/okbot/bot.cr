@@ -40,7 +40,7 @@ client.on_message_create do |message|
     msg = message.content.split
     puts "msg: #{msg}"
 
-    if msg.size < 3
+    if msg.size < 4
       client.create_message(message.channel_id, "Usage: `.convert <amount> <base> <target>`, for example: `.convert 1000 ok usd`")
       next
     end
