@@ -9,5 +9,6 @@ license: MIT
 dependencies:
   discordcr:
     github: meew0/discordcr
+    branch: master
   dotenv:
     github: gdotdesign/cr-dotenv
