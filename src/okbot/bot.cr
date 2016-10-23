@@ -21,6 +21,9 @@ client.on_message_create do |message|
   when /^\.ping/
     # ATM just responds with "pong"
     client.create_message(message.channel_id, "pong")
+  when /^\.invite/
+    client.create_message(message.channel_id, "You can add your bot to your own server with the following URL: 
+https://discordapp.com/oauth2/authorize?&client_id=227838490174291968&scope=bot")
   when /^\.price/
     # Gets price info from cryptonator
     response = get "https://api.cryptonator.com/api/full/ok-btc"
