@@ -90,7 +90,13 @@ https://discordapp.com/oauth2/authorize?&client_id=227838490174291968&scope=bot"
     ask = "%.8f" % res["Ask"].as_f
     last = "%.8f" % res["Last"].as_f
     client.create_message(message.channel_id, "**Bittrex**\n_Bid:_ #{bid}, _Ask:_ #{ask}, _Last_: #{last}")
-
+  when /^\.cryptopia/
+    response = JSON.parse(HTTP::Client.get("https://www.cryptopia.co.nz/api/GetMarket/1298", headers: HTTP::Headers{"Connection" => "Close"}).body)
+    res = response["Data"]
+    bid = "%.8f" % res["BidPrice"].as_f
+    ask = "%.8f" % res["AskPrice"].as_f
+    last = "%.8f" % res["LastPrice"].as_f
+    client.create_message(message.channel_id, "**Cryptopia**\n_Bid:_ #{bid}, _Ask:_ #{ask}, _Last_: #{last}")
   when /^\.gif/
     msg = message.content.split
     tag = msg[1..-1].join("+")
