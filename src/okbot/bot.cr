@@ -38,14 +38,15 @@ https://discordapp.com/oauth2/authorize?&client_id=227838490174291968&scope=bot"
     response = get "https://api.cryptonator.com/api/full/ok-btc"
     res = response["ticker"]
     string = ""
-    res["markets"].each { |x| string = string + "#{x["market"]}: #{x["price"]} BTC, " }
+    res["markets"].each { |x| string = string + "#{x["market"]}: #{x["price"]} BTC, " unless x["market"] == "YoBit" }
+    string = string.rchop ", "
     client.create_message(message.channel_id, "#{string} _(Cryptonator)_")
   when /^\.market/
     # Gets maret info (price command + volume)
     response = get "https://api.cryptonator.com/api/full/ok-btc"
     res = response["ticker"]
     string = ""
-    res["markets"].each { |x| string = string + "#{x["market"]}:\n  Price: #{x["price"]} BTC, Volume: #{x["volume"]} OK\n" }
+    res["markets"].each { |x| string = string + "#{x["market"]}:\n  Price: #{x["price"]} BTC, Volume: #{x["volume"]} OK\n" unless x["market"] == "YoBit" }
     client.create_message(message.channel_id, "```yaml\n#{string}(Cryptonator)\n```")
   when /^\.convert/
     # converts cryptocurrencies

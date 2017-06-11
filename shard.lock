@@ -2,9 +2,9 @@ version: 1.0
 shards:
   discordcr:
     github: meew0/discordcr
-    commit: 563f89f71adf5d145e11c0aa812bb5b3bd278776
+    commit: 2faf47a215019b35ea70b16a91f38954a817b9a7
 
   dotenv:
     github: gdotdesign/cr-dotenv
-    commit: 68702bfa0a3c7eda9aa448c36d2d68dcecce7677
+    commit: 341678090110cdb5436f75cc796c785ed392c4be
 
